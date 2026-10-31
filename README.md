@@ -57,3 +57,7 @@ The review HTML is `rendered/kb/decisions/0002-dedupe-by-cause/index.html`.
 Product-runtime regression checks remain proposed; this export has no working booking product.
 
 Published tickets: [parser, 379 reports](https://github.com/lpietrzak83/megadev-s01e03-what-it-shows/issues/1) and [booking-v3 hint, 33 reports](https://github.com/lpietrzak83/megadev-s01e03-what-it-shows/issues/2).
+
+The later course engineering notice reports #4471 closed on 05 oct: parser FIXED;
+hint WON'T FIX because booking-v3 form retired. It is preserved in src/lib/data/desk-update.json
+and shown separately from the unchanged 4 October report export.

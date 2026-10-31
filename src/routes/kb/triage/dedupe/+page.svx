@@ -36,3 +36,10 @@ When unsure, preserve the evidence and investigate before merging.
 
 The explorer runs the supplied tenant/channel classifier. Its output is a candidate cohort,
 not a substitute for reading the body. See the review's unresolved timing observations.
+
+## Current product status
+
+The [engineering update](/kb/decisions/0002-dedupe-by-cause#engineering-update) reports
+#4471 closed: parser fixed; booking-v3 hint not planned because that form was retired.
+The explorer represents the historical export, including retired booking-v3 paths.
+Check the current tenant form before applying that historical classification to new reports.

@@ -19,11 +19,11 @@ Suggested reproduction to verify (derived from the supplied model): with Harbour
 - R-41344: Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting. We held it twice.
 - R-41620: Tuesday 6 October showed as Monday. I moved it myself. I have stopped reporting these but my colleague says it helps you.
 
-These five are included in the 379 contextual parser cohort, not added to it. Their bodies do not prove month/day reversal. R-41236 does not explicitly report a one-day shift. No evidence here confirms timezone/DST or one third common cause. Keep these cases open for input, timestamp and tenant/timezone investigation before closure. The remaining 374 reports are outside this explicit anomaly list; this is not a claim of individual causal verification.
+These five are included in the 379 contextual parser cohort, not added to it. Their bodies do not prove month/day reversal. R-41236 does not explicitly report a one-day shift. No evidence here confirms timezone/DST or one third common cause. Retain these observations for separate input, timestamp and tenant/timezone follow-up if symptoms recur. The later engineering notice governs the ticket closure; it does not individually explain the observations. The remaining 374 reports are outside this explicit anomaly list; this is not a claim of individual causal verification.
 
-## Verification before closure
+## Original verification proposal (not executed)
 
-No product runtime is included in this export. These are proposed regression checks, not tests executed against the product.
+No product runtime is included in this export. These are proposed regression checks, not tests executed against the product. The later engineering notice supersedes this proposal for ticket disposition.
 
 Test ambiguous numeric dates with a known intended date, all affected tenant/channel paths, differing browser and tenant locales, and the other defect independently. No fix is claimed deployed or verified by this export.
 
@@ -37,3 +37,11 @@ Test ambiguous numeric dates with a known intended date, all affected tenant/cha
 - rendered/kb/decisions/0002-dedupe-by-cause/index.html
 
 The preserved ticket-system data has not been actually re-filed by publishing this issue.
+
+## Engineering disposition
+
+Source: https://hq.mega.dev/challenges/what-it-shows (engineering update observed 2026-10-31). Source #4471 is reported closed on 05 oct.
+
+**FIXED** — fix(dates): parse dd/mm for eu locales. GitHub closure reason: **completed**.
+
+Closed as completed based on the course engineering notice. This is not an independently executed product regression or deployment verification, and does not individually explain the five anomalous source bodies. Preserve them for follow-up if they recur.

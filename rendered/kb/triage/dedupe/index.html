@@ -6,11 +6,11 @@
 		<link href="../../../_app/immutable/chunks/CptVIHXj.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CHfFqfNT.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DQG8lHS1.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.Bp73csXs.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.RZh2mxkf.js" rel="modulepreload">
 		<link href="../../../_app/immutable/nodes/0.CTf4XHXr.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DK3Fl9T5.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/6.RAxYtxts.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/kA0Gp2nB.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/6.S3dDcfgf.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DAHShbH6.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DkoUumqI.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DcZ9TEUN.js" rel="modulepreload">
 		<!--e2jw2j--><!----><title>Triage: duplicate reports · support kb</title>
@@ -21,20 +21,23 @@
 and preserve every report’s source and body.</p> <h2>Current rule</h2> <p><a href="/kb/decisions/0002-dedupe-by-cause">Decision 0002 and the #4471 review</a> replace
 the subject-only rule in <a href="/kb/decisions/0001-dedupe-by-subject">historical decision 0001</a>.</p> <ol><li>Use normalized subjects to find candidates.</li> <li>Read the report and verify tenant locale, booking form and channel.</li> <li>Merge only if the behavior and context support the same cause.</li> <li>If the tenant is unknown or the body conflicts with the proposed cause, keep it separate for investigation.</li> <li>Deduplicate export overlaps by report ID; do not count every JSON row as a new report.</li></ol> <aside class="warn svelte-17bri61"><!---->Matching subjects are not sufficient evidence. Different subjects do not rule out one cause.
 When unsure, preserve the evidence and investigate before merging.<!----></aside><!----> <h2>Try it</h2> <div class="try svelte-gq0h2h"><!--[--><fieldset class="svelte-gq0h2h"><legend>report A</legend> <select aria-label="tenant"><!--[--><option selected="">alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option>kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>hint</code></fieldset><fieldset class="svelte-gq0h2h"><legend>report B</legend> <select aria-label="tenant"><!--[--><option>alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option selected="">kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>parser</code></fieldset><!--]--> <p class="verdict svelte-gq0h2h">different causes — keep apart</p></div> <table><thead><tr><th>case</th><th>same subject</th><th>same cause</th></tr></thead><tbody><!--[--><tr><td>app vs email, same tenant</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>same subject, same tenant, different channel</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>same subject, same channel, different tenant</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>different subject, same way in</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>no tenant on file</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><!--]--></tbody></table><!----> <p>The explorer runs the supplied tenant/channel classifier. Its output is a candidate cohort,
-not a substitute for reading the body. See the review’s unresolved timing observations.</p><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!--]--><!--]--><!----><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
+not a substitute for reading the body. See the review’s unresolved timing observations.</p> <h2>Current product status</h2> <p>The <a href="/kb/decisions/0002-dedupe-by-cause#engineering-update">engineering update</a> reports
+#4471 closed: parser fixed; booking-v3 hint not planned because that form was retired.
+The explorer represents the historical export, including retired booking-v3 paths.
+Check the current tenant form before applying that historical classification to new reports.</p><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!--]--><!--]--><!----><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_1ntq95m = {
+					__sveltekit_m7axsp = {
 						base: new URL("../../..", location).pathname.slice(0, -1),
-						version: "1793462271733"
+						version: "1793462457116"
 					};
 
 					const element = document.currentScript.parentElement;
 
 					import("../../../_app/immutable/entry/start.D1HzdfF7.js").then(async (kit) => {
-						kit.init(__sveltekit_1ntq95m);
-						const app = await import("../../../_app/immutable/entry/app.Bp73csXs.js");
+						kit.init(__sveltekit_m7axsp);
+						const app = await import("../../../_app/immutable/entry/app.RZh2mxkf.js");
 						kit.start(app, element, {
 							node_ids: [0, 6],
 							data: [null,null],

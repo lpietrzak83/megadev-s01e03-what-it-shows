@@ -2,12 +2,13 @@
 layout: runbook
 title: '#4471 · date reports split by cause'
 owner: support desk
-status: split-under-review
+status: closed-per-engineering
 reviewed: '2026-10-31'
 ---
 
 <script>
   import CauseTable from '#lib/kb/CauseTable.svelte';
+  import DeskOutcome from '#lib/kb/DeskOutcome.svelte';
   import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
   import Callout from '#lib/kb/Callout.svelte';
 </script>
@@ -18,9 +19,11 @@ Read the [signed review and replacement triage decision](/kb/decisions/0002-dedu
 for their mechanisms, independent engineering tickets, source limitations and unresolved observations.
 
 <Callout kind="warn">
-The month-first parser defect and booking-v3 format-hint defect require independent fixes.
-The export does not establish that either fix has shipped or that every reported symptom is explained.
+The parser and booking-v3 hint have distinct outcomes, shown below.
+The historical export does not establish deployment or explain every reported symptom.
 </Callout>
+
+<DeskOutcome />
 
 ## Snapshot of the reports historically merged into #4471
 

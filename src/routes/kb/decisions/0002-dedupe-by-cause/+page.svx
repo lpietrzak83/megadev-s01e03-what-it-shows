@@ -9,6 +9,7 @@ signature: 'v1.eyJzdWIiOiIyMjE4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpY
 
 <script>
   import CauseTable from '#lib/kb/CauseTable.svelte';
+  import DeskOutcome from '#lib/kb/DeskOutcome.svelte';
   import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
   import ReviewEvidence from '#lib/kb/ReviewEvidence.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
@@ -23,9 +24,11 @@ The accepted historical record is preserved unchanged. The active
 
 <Callout kind="warn">
 The old #4471 narrative says “one issue, one fix queued.” Its own computed evidence shows
-two distinct product problems. A queued parser fix does not address the booking-form hint.
-Neither fix is demonstrated as shipped or verified by this export.
+two distinct product problems. The later engineering update below gives a separate outcome for each problem.
+It does not provide independent deployment or product-test evidence.
 </Callout>
+
+<DeskOutcome />
 
 ## Scope and evidence
 
@@ -49,9 +52,9 @@ The source-of-truth count and scope appear in the computed table above.
 The cohort includes the unresolved observations listed below; it does not establish
 a parser root cause for every body. Preserve those caveats during follow-up.
 
-Verify the fix with an unambiguous tenant date convention and an ambiguous numeric example
+**Original verification proposal (not executed; engineering notice governs disposition):** Test an unambiguous tenant date convention and an ambiguous numeric example
 such as `07/04/2026`: the intended 7 April must remain 7 April in the invite.
-Test app, email and applicable booking-v2 form paths. A passing hint test alone cannot close this ticket.
+Test app, email and applicable booking-v2 form paths. The proposed parser and hint checks address different input paths.
 
 ## Problem B: booking-v3 prints the wrong date-format hint
 
@@ -65,7 +68,7 @@ Examples: Copper Studio form report R-41230 and Alder Physio form report R-41241
 Both were merged into #4471, but neither is resolved merely by changing the shared parser.
 
 **Engineering ticket:** [GitHub #2 — booking-v3 hint](https://github.com/lpietrzak83/megadev-s01e03-what-it-shows/issues/2).
-Verify that displayed guidance, accepted input and resulting booking agree for each tenant locale.
+**Original verification proposal (superseded by form retirement):** Check that displayed guidance, accepted input and resulting booking agree for each tenant locale.
 For a day-first tenant, entering 6 January according to the displayed guidance must preserve 6 January.
 Check both booking-v3 and booking-v2, with browser locale differing from the tenant locale.
 
@@ -93,9 +96,9 @@ An unknown sender has no verified tenant context and must not be automatically m
 
 ## Consequences and handoff
 
-Two independent engineering tickets replace the single-fix interpretation.
+Two independent engineering tickets replace the single-fix interpretation. Their closure reasons follow the later course engineering notice: parser completed; hint not planned because booking-v3 was retired.
 This review does not mutate the historical ticket-system export or claim that reports have
 already been moved in the real desk. The two engineering tickets linked above are published in the challenge repository.
-Before closing either problem, verify its own reproduction path and revisit the anomalous bodies.
+The reproduction checks above describe the original problem paths. Engineering closure does not individually explain the anomalous bodies; retain them for follow-up if symptoms recur.
 
 <RenderStamp {signature} />

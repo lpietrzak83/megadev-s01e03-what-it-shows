@@ -11,13 +11,13 @@
 Booking-v3 prints MM/DD/YYYY while its form reads the tenant day-first convention. Scope: form channel at Alder Physio (de-DE), Copper Studio (es-ES), Pale Harbour (pt-PT). App/email reports at the same tenants belong to the parser cohort.
 
 Suggested reproduction to verify (derived from the supplied model): with a day-first booking-v3 tenant: follow MM/DD/YYYY to enter 6 January as 01/06/2026; the tenant-local form interprets 1 June. Expected: the displayed hint, accepted input and resulting booking agree. R-41230 and R-41241 are example reports in this cohort.
-## Independent fix
+## Original fix proposal (superseded by form retirement)
 
-Correct tenant-local hint/validation consistency. A shared-parser fix alone does not repair this UI/input contract. Check the same browser locale against different tenant locales and both booking form versions.
+At snapshot time, a repair would have aligned tenant-local hints and validation. A shared-parser fix alone would not have repaired this UI/input contract. Proposed checks compared browser and tenant locales and both form versions. Engineering subsequently retired booking-v3 instead of fixing its hint.
 
-## Verification before closure
+## Original verification proposal (not executed)
 
-No product runtime is included in this export. These are proposed regression checks, not tests executed against the product.
+No product runtime is included in this export. These are proposed regression checks, not tests executed against the product. The later engineering notice supersedes this proposal for ticket disposition.
 
 Test ambiguous numeric dates with a known intended date, all affected tenant/channel paths, differing browser and tenant locales, and the other defect independently. No fix is claimed deployed or verified by this export.
 
@@ -31,3 +31,11 @@ Test ambiguous numeric dates with a known intended date, all affected tenant/cha
 - rendered/kb/decisions/0002-dedupe-by-cause/index.html
 
 The preserved ticket-system data has not been actually re-filed by publishing this issue.
+
+## Engineering disposition
+
+Source: https://hq.mega.dev/challenges/what-it-shows (engineering update observed 2026-10-31). Source #4471 is reported closed on 05 oct.
+
+**WON'T FIX** — booking-v3 form retired. GitHub closure reason: **not_planned**.
+
+Closed as not planned because booking-v3 was retired. The hint defect was not fixed by the parser change; its affected form was removed. The historical report count remains valid.
