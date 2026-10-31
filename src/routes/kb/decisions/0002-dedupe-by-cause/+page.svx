@@ -1,0 +1,101 @@
+---
+layout: runbook
+title: '#4471 review · separate causes before merging'
+owner: lpietrzak83
+status: current
+reviewed: '2026-10-31'
+signature: 'v1.eyJzdWIiOiIyMjE4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM0NjE3MzcsImV4cCI6MTc5MzU0ODEzN30.AnKIba_Ef64LU3Z33D5k19QA8Zwhqh4sG4sh4wyQx9w'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import ReviewEvidence from '#lib/kb/ReviewEvidence.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+## Decision 0002: replace subject-only deduplication
+
+This record supersedes [decision 0001](/kb/decisions/0001-dedupe-by-subject).
+The accepted historical record is preserved unchanged. The active
+[triage runbook](/kb/triage/dedupe) now requires evidence of the same cause before merging.
+
+<Callout kind="warn">
+The old #4471 narrative says “one issue, one fix queued.” Its own computed evidence shows
+two distinct product problems. A queued parser fix does not address the booking-form hint.
+Neither fix is demonstrated as shipped or verified by this export.
+</Callout>
+
+## Scope and evidence
+
+This review was performed on 31 October 2026 against the support kb export dated
+4 October 2026. It describes a snapshot, not today's live support queue.
+The reports and tenant files are preserved unchanged. Tables and charts run the supplied
+logic in `causes.ts`, `locales.ts` and the kb components at render time.
+
+<CauseTable ticket={4471} />
+
+## Problem A: month-first shared parser in day-first tenants
+
+The shared parser interprets dates as month/day while the tenant writes day/month.
+For example, Harbour Dental's app report R-41200 describes 7 April becoming 4 July;
+Lantern Row's app report R-41203 describes 2 December becoming 12 February.
+The parser cohort covers app and email reports in day-first tenants, and form reports
+where the form does not introduce the booking-v3 hint defect.
+
+**Engineering ticket:** [GitHub #1 — parser](https://github.com/lpietrzak83/megadev-s01e03-what-it-shows/issues/1).
+The source-of-truth count and scope appear in the computed table above.
+The cohort includes the unresolved observations listed below; it does not establish
+a parser root cause for every body. Preserve those caveats during follow-up.
+
+Verify the fix with an unambiguous tenant date convention and an ambiguous numeric example
+such as `07/04/2026`: the intended 7 April must remain 7 April in the invite.
+Test app, email and applicable booking-v2 form paths. A passing hint test alone cannot close this ticket.
+
+## Problem B: booking-v3 prints the wrong date-format hint
+
+Booking-v3 prints `MM/DD/YYYY` for tenants whose form interprets dates in the tenant's day-first
+convention. Following the hint supplies month first to a day-first form.
+This is a separate UI/input contract defect, even when its symptoms resemble the parser defect.
+The affected form reports come from Alder Physio, Copper Studio and Pale Harbour.
+App/email reports at those same tenants still belong in the parser cohort.
+
+Examples: Copper Studio form report R-41230 and Alder Physio form report R-41241.
+Both were merged into #4471, but neither is resolved merely by changing the shared parser.
+
+**Engineering ticket:** [GitHub #2 — booking-v3 hint](https://github.com/lpietrzak83/megadev-s01e03-what-it-shows/issues/2).
+Verify that displayed guidance, accepted input and resulting booking agree for each tenant locale.
+For a day-first tenant, entering 6 January according to the displayed guidance must preserve 6 January.
+Check both booking-v3 and booking-v2, with browser locale differing from the tenant locale.
+
+<ReviewEvidence />
+
+## Queue history
+
+<QueueTimeline ticket={4471} />
+
+## How the desk works from now on
+
+1. Find candidates using subject or semantic similarity; neither establishes a duplicate.
+2. Read the body, look up the tenant locale and booking-form version, then identify the channel.
+3. Merge only when the observed behavior and verified context support the same cause.
+4. Keep unknown tenants, unexplained timing shifts and conflicting evidence separate for investigation.
+5. Retain original IDs and provenance. Update the issue's count from distinct report IDs.
+6. Recheck this page when tenant forms, date parsing or the live queue change.
+   Assign a review owner and date; this snapshot must not silently become a live count.
+
+Identical subjects can represent different causes: Alder Physio form versus app;
+Copper Studio form versus Morrow Tax form.
+Different subjects can share a cause: Kettle Books app versus email;
+Pale Harbour form versus Alder Physio form.
+An unknown sender has no verified tenant context and must not be automatically merged.
+
+## Consequences and handoff
+
+Two independent engineering tickets replace the single-fix interpretation.
+This review does not mutate the historical ticket-system export or claim that reports have
+already been moved in the real desk. The two engineering tickets linked above are published in the challenge repository.
+Before closing either problem, verify its own reproduction path and revisit the anomalous bodies.
+
+<RenderStamp {signature} />

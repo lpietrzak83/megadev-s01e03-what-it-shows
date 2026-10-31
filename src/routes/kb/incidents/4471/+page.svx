@@ -1,0 +1,42 @@
+---
+layout: runbook
+title: '#4471 · date reports split by cause'
+owner: support desk
+status: split-under-review
+reviewed: '2026-10-31'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+This incident was previously described as one known parser problem with one fix queued.
+The 4 October 2026 export contains distinct causes.
+Read the [signed review and replacement triage decision](/kb/decisions/0002-dedupe-by-cause)
+for their mechanisms, independent engineering tickets, source limitations and unresolved observations.
+
+<Callout kind="warn">
+The month-first parser defect and booking-v3 format-hint defect require independent fixes.
+The export does not establish that either fix has shipped or that every reported symptom is explained.
+</Callout>
+
+## Snapshot of the reports historically merged into #4471
+
+<CauseTable ticket={4471} />
+
+These are counts from the preserved export, not a live queue query.
+Some parser-cohort bodies need further investigation; the review preserves their IDs and text.
+
+## Received versus merged
+
+<QueueTimeline ticket={4471} />
+
+The first merge date is not the first report date. Do not infer an absence of investigation
+from the consolidation timeline.
+
+## Current triage
+
+Follow the [cause-based runbook](/kb/triage/dedupe).
+Preserve unique IDs, verify context and keep unexplained cases apart until their cause is established.

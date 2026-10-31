@@ -1,0 +1,38 @@
+---
+layout: runbook
+title: 'Triage: duplicate reports'
+owner: support desk
+status: current
+reviewed: '2026-10-31'
+---
+
+<script>
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+Keep one engineering ticket per established problem. Count unique report IDs,
+and preserve every report's source and body.
+
+## Current rule
+
+[Decision 0002 and the #4471 review](/kb/decisions/0002-dedupe-by-cause) replace
+the subject-only rule in [historical decision 0001](/kb/decisions/0001-dedupe-by-subject).
+
+1. Use normalized subjects to find candidates.
+2. Read the report and verify tenant locale, booking form and channel.
+3. Merge only if the behavior and context support the same cause.
+4. If the tenant is unknown or the body conflicts with the proposed cause, keep it separate for investigation.
+5. Deduplicate export overlaps by report ID; do not count every JSON row as a new report.
+
+<Callout kind="warn">
+Matching subjects are not sufficient evidence. Different subjects do not rule out one cause.
+When unsure, preserve the evidence and investigate before merging.
+</Callout>
+
+## Try it
+
+<DedupeExplorer />
+
+The explorer runs the supplied tenant/channel classifier. Its output is a candidate cohort,
+not a substitute for reading the body. See the review's unresolved timing observations.
